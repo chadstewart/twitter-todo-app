@@ -9,13 +9,16 @@ app.use(express.urlencoded());
 //Iniitalize Data Storage
 let data = ['test1', 'test2', 'test3'];
 
-// First route. Go to http://localhost:5000 and you should see Hello World in the
-// browser. Remember the project has no UI, so this is just for you to experience
-// that this all works.
-
 //Initial Landing
 app.get('/', (req, res) => res.redirect('/home'));
 app.get('/home', function (req, res) {
+
+    res.sendFile((__dirname + '/index.html'));
+
+});
+
+
+app.get('/testread', function (req, res) {
     
     if(!data.length) {
         res.send('Hiho!!');
@@ -31,18 +34,19 @@ app.get('/home', function (req, res) {
 
 });
 
+
 //New Entry
-app.post('/add', function (req, res) {
+app.post('/api/add', function (req, res) {
 
     data.push(req.body.entry);
     res.send(`You added ${data[data.length - 1]}!`);
 
-    setTimeout(() => res.redirect('/home'), 5000);
+    //setTimeout(() => res.redirect('/home'), 5000);
 
 });
 
 //Delete Entry
-app.delete('/remove', function(req, res) {
+app.post('/api/remove', function(req, res) {
 
     if(req.body.delete > 0 && req.body.delete <= data.length) {
         data.slice(req.body.delete, 1);
@@ -54,11 +58,12 @@ app.delete('/remove', function(req, res) {
 });
 
 //Update Entry
-app.post('/update', function(req, res) {
+app.post('/api/update', function(req, res) {
 
-    if(req.body.update > 0 && req.body.update <= data.length) {
-        data[req.body.record] = req.body.data;
-        res.send(`Successfully updated ${req.body.record}!`);
+    if(req.body.record > 0 && req.body.record <= data.length) {
+        data[req.body.record - 1] = req.body.data;
+        res.send(`Successfully updated task# ${req.body.record}
+                  to ${data[req.body.record - 1]}!`);
     } else {
         res.send(`${req.body.record} does not exist!`);
     }

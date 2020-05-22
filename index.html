@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>Crappy UI!!</title>
+    </head>
+
+    <body>
+        <div>
+            <form action="/api/add" method="POST">
+            
+                <label for="task">Insert task here: </label>
+                <input id="entry" name="entry">
+                <input type="submit" value="submit">
+            
+            </form>
+        </div>
+
+
+        <div>
+            <form action="/api/remove" method="POST">
+            
+                <label for="task">Task number to delete: </label>
+                <input id="delete" name="delete">
+                <input type="submit" value="submit">
+            
+            </form>
+        </div>
+
+        <div>
+            <form action="/api/update" method="POST">
+            
+                <label for="task">Task number to update: </label>
+                <input id="record" name="record">
+                <label for="task-name">Updated Task name: </label>
+                <input id="data" name="data">
+                <input type="submit" value="submit">
+            
+            </form>
+        </div>
+    </body>
+</html>
