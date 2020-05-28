@@ -8,9 +8,10 @@ router.get('/', function (req, res) {
         res.send('Hiho!!');
     } else {
         let output = ``;
+        let count = 0;
 
-        for(let i = 0; i < testData.data.length; i++) {
-            output = output.concat(`${i + 1}. ${testData.data[i]} `);
+        for(let item of testData.data) {
+            output = output.concat(`${count + 1}. ${item} `);
         }
 
         res.send(`${output}`);

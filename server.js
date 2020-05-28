@@ -26,15 +26,15 @@ app.use(express.urlencoded({ extended: false }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-//Setup Static assets
-app.use(express.static(path.join(__dirname, 'public')));
-
 //Use Routers
 app.use('/', indexRouter);
 app.use(apiPath + '/read', readRouter);
 app.use(apiPath + '/add', addRouter);
 app.use(apiPath + '/remove', deleteRouter);
 app.use(apiPath + '/update', updateRouter);
+
+//Setup Static assets
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 

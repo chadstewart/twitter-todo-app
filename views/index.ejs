@@ -5,6 +5,14 @@
 
     <body>
         <div>
+            <h4>To Do List:</h4>
+            <ol>
+                <% result.data.forEach(result => { %>
+                    <li><%= result %></li>
+                <% }) %>
+            </ol>
+        </div>
+        <div>
             <form action="/api/add" method="POST">
             
                 <label for="task">Insert task here: </label>
