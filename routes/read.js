@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const testData = require('../data-persistence/data');
+const { data } = require('../data-persistence/data');
 
 router.get('/', function (req, res) {
     
@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
         let output = ``;
         let count = 0;
 
-        for(let item of testData.data) {
+        for(let item of data) {
             output = output.concat(`${count + 1}. ${item} `);
         }
 

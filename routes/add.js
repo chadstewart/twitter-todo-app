@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const testData = require('../data-persistence/data');
+const { data } = require('../data-persistence/data');
 
 router.post('/', function (req, res) {
 
-    testData.data.push(req.body.entry);
-    res.send(`You added ${testData.data[testData.data.length - 1]}!`);
+    data.push(req.body.entry);
+    res.send(`You added ${data[data.length - 1]}!`);
 
     //setTimeout(() => res.redirect('/home'), 5000);
 
