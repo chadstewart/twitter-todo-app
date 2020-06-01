@@ -1,19 +1,19 @@
 // Setup server
 const express = require("express");
 const app = express();
+//Add Path library to join files based on route location
+const path = require("path");
 // ------------------ Don't change above this line ------------------
 
-
-
-//Add Path ibrary
-const path = require("path");
-
 //Initialize Routers
+// =>>>> aka business logic
 const indexRouter = require('./routes/index');
-const readRouter = require('./routes/read');
-const addRouter = require('./routes/add');
-const deleteRouter = require('./routes/delete');
-const updateRouter = require('./routes/update');
+const todoRouter = require('./routes/todo');
+// const authRouter = require('./routes/auth')
+// const readRouter = require('./routes/read');
+// const addRouter = require('./routes/add');
+// const deleteRouter = require('./routes/delete');
+// const updateRouter = require('./routes/update');
 
 //Initialize API path
 const apiPath = '/api';
@@ -28,17 +28,20 @@ app.set('view engine', 'ejs');
 
 //Use Routers
 app.use('/', indexRouter);
-app.use(apiPath + '/read', readRouter);
-app.use(apiPath + '/add', addRouter);
-app.use(apiPath + '/remove', deleteRouter);
-app.use(apiPath + '/update', updateRouter);
+app.use(apiPath, todoRouter);
+// app.use(apiPath, authRouter);
+// app.use(apiPath, readRouter);
+// app.use(apiPath, addRouter);
+// app.use(apiPath, deleteRouter);
+// app.use(apiPath, updateRouter);
 
 //Setup Static assets
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+// Hi
 
 // -------------------- Don't change below this line ------------------
 // Setup where the server listens e.g. which port. Necessary for the browser for example.
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { data } = require('../data-persistence/data');
 
-router.post('/', function(req, res) {
+router.post('/update', function(req, res) {
 
     if(req.body.record > 0 && req.body.record <= data.length) {
         data[req.body.record - 1] = req.body.data;
