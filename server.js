@@ -9,11 +9,6 @@ const path = require("path");
 // =>>>> aka business logic
 const indexRouter = require('./routes/index');
 const todoRouter = require('./routes/todo');
-// const authRouter = require('./routes/auth')
-// const readRouter = require('./routes/read');
-// const addRouter = require('./routes/add');
-// const deleteRouter = require('./routes/delete');
-// const updateRouter = require('./routes/update');
 
 //Initialize API path
 const apiPath = '/api';
@@ -28,12 +23,7 @@ app.set('view engine', 'ejs');
 
 //Use Routers
 app.use('/', indexRouter);
-app.use(apiPath, todoRouter);
-// app.use(apiPath, authRouter);
-// app.use(apiPath, readRouter);
-// app.use(apiPath, addRouter);
-// app.use(apiPath, deleteRouter);
-// app.use(apiPath, updateRouter);
+app.use(apiPath + '/todo', todoRouter);
 
 //Setup Static assets
 app.use(express.static(path.join(__dirname, 'public')));

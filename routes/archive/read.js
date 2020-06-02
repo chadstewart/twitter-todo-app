@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { data } = require('../data-persistence/data');
+const { data } = require('../../data-persistence/data');
 
 router.get('/read', (req, res) => {
 
