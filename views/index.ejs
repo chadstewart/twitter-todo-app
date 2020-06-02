@@ -9,7 +9,7 @@
             </ol>
         </div>
         <div>
-            <form action="/api/add" method="POST">
+            <form action="/api/todo/add" method="POST">
 
                 <label for="task">Insert task here: </label>
                 <input id="entry" name="entry">
@@ -20,17 +20,17 @@
 
 
         <div>
-            <form action="/api/remove" method="POST">
+            <form action="/api/todo/remove" method="POST">
 
                 <label for="task">Task number to delete: </label>
-                <input id="delete" name="delete">
+                <input id="remove" name="remove">
                 <input type="submit" value="submit">
 
             </form>
         </div>
 
         <div>
-            <form action="/api/update" method="POST">
+            <form action="/api/todo/update" method="POST">
 
                 <label for="task">Task number to update: </label>
                 <input id="record" name="record">
