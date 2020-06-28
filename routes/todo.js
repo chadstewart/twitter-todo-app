@@ -13,14 +13,14 @@ router.post('/add', (req, res) => {
 router.post('/update', (req, res) => {
   // ES6 Destructuring
   const { record } = req.body;
-  const { data: reqData } = req.body;
+  // const { data: reqData } = req.body;
 
-  if(record > 0 && record <= reqData.length) {
-      data[record - 1] = reqData;
+  // Redo this section
+  // if(record > 0 && record <= reqData.length) {
+      // data[record - 1] = reqData;
       /* res.send(`Successfully updated task #${record}
                 to ${data[record - 1]}!`); */
-
-  }
+  // }
   
   res.redirect('/home');
   //res.send(`${record} does not exist!`);

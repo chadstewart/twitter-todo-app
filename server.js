@@ -1,17 +1,19 @@
 // Setup server
 const express = require("express");
-const app = express();
+// const env = require('dotenv')
+// env.config({})
+// const mongoose = require("mongoose")
+
 //Add Path library to join files based on route location
 const path = require("path");
+
+const app = express();
 // ------------------ Don't change above this line ------------------
 
 //Initialize Routers
 // =>>>> aka business logic
 const indexRouter = require('./routes/index');
 const todoRouter = require('./routes/todo');
-
-//Initialize API path
-const apiPath = '/api';
 
 //Initialize Request Data Type
 app.use(express.json());
@@ -23,7 +25,7 @@ app.set('view engine', 'ejs');
 
 //Use Routers
 app.use('/', indexRouter);
-app.use(apiPath + '/todo', todoRouter);
+app.use('/api/todo', todoRouter);
 
 //Setup Static assets
 app.use(express.static(path.join(__dirname, 'public')));
