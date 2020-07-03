@@ -1,20 +1,22 @@
 // Setup server
 const express = require("express");
-const mongoose = require("mongoose")
 const path = require("path");
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/MyDb',
+//Setup Local MongoDB Instance connection
+require('dotenv/config');
+const mongoose = require("mongoose");
+mongoose.connect(
+    process.env.DB_CONNECTION,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
     },
-    () => {console.log("It worked!!")}
+    () => {console.log("DB Connection Established Successfully")}
 );
 // ------------------ Don't change above this line ------------------
 
 //Initialize Routers
-// =>>>> aka business logic
 const indexRouter = require('./routes/index');
 const todoRouter = require('./routes/todo');
 
@@ -34,6 +36,7 @@ app.use('/api/todo', todoRouter);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // -------------------- Don't change below this line ------------------
+
 // Setup where the server listens e.g. which port. Necessary for the browser for example.
 const PORT = process.env.PORT || 5000;
 

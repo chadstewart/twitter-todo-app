@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { data } = require('../data-persistence/data');
+//const { data } = require('../data-persistence/data');
 
 router.post('/add', (req, res) => {
     const { entry } = req.data;
 
-    data.push(entry);
+    //data.push(entry);
     res.redirect('/home');
 });
 
-router.post('/update', (req, res) => {
+/* router.post('/update', (req, res) => {
   const { record } = req.body;
   // const { data: reqData } = req.body;
 
@@ -33,6 +33,6 @@ router.post('/remove', function(req, res) {
   
   res.redirect('/home');
   //return res.send(`${req.body.delete} does not exist!`);
-});
+}); */
 
 module.exports = router;
