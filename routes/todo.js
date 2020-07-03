@@ -3,7 +3,6 @@ const router = express.Router();
 const { data } = require('../data-persistence/data');
 
 router.post('/add', (req, res) => {
-  // ES6 Destructuring
     const { entry } = req.data;
 
     data.push(entry);
@@ -11,23 +10,20 @@ router.post('/add', (req, res) => {
 });
 
 router.post('/update', (req, res) => {
-  // ES6 Destructuring
   const { record } = req.body;
   // const { data: reqData } = req.body;
 
-  // Redo this section
-  // if(record > 0 && record <= reqData.length) {
-      // data[record - 1] = reqData;
-      /* res.send(`Successfully updated task #${record}
-                to ${data[record - 1]}!`); */
-  // }
+  if(record > 0 && record <= reqData.length) {
+      data[record - 1] = reqData;
+      res.send(`Successfully updated task #${record}
+                to ${data[record - 1]}!`);
+  }
   
   res.redirect('/home');
   //res.send(`${record} does not exist!`);
 });
 
 router.post('/remove', function(req, res) {
-  // ES6 Destructuring
   const { remove } = req.body
 
   if(remove > 0 && remove <= data.length) {
