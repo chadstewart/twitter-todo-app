@@ -1,12 +1,17 @@
 const express = require('express');
+const app = express();
 const router = express.Router();
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 //const { data } = require('../data-persistence/data');
 
-router.post('/add', (req, res) => {
-    const { entry } = req.data;
+app.use(bodyParser.json());
 
-    //data.push(entry);
-    res.redirect('/home');
+router.post('/add', (req, res) => {
+    const { entry } = req.body;
+
+    console.log(req.body);
+    // res.redirect('/home');
 });
 
 /* router.post('/update', (req, res) => {

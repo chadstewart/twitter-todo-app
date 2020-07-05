@@ -4,7 +4,7 @@ const path = require("path");
 const app = express();
 
 //Setup Local MongoDB Instance connection
-require('dotenv/config');
+/* require('dotenv/config');
 const mongoose = require("mongoose");
 mongoose.connect(
     process.env.DB_CONNECTION,
@@ -13,7 +13,7 @@ mongoose.connect(
         useUnifiedTopology: true
     },
     () => {console.log("DB Connection Established Successfully")}
-);
+); */
 // ------------------ Don't change above this line ------------------
 
 //Initialize Routers
