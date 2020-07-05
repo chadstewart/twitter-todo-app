@@ -2,9 +2,10 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const bodyParser = require('body-parser');
 
 //Setup Local MongoDB Instance connection
-/* require('dotenv/config');
+require('dotenv/config');
 const mongoose = require("mongoose");
 mongoose.connect(
     process.env.DB_CONNECTION,
@@ -13,7 +14,7 @@ mongoose.connect(
         useUnifiedTopology: true
     },
     () => {console.log("DB Connection Established Successfully")}
-); */
+);
 // ------------------ Don't change above this line ------------------
 
 //Initialize Routers
@@ -22,6 +23,7 @@ const todoRouter = require('./routes/todo');
 
 //Initialize Request Data Type
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 
 //Setup EJS view engine

@@ -1,16 +1,19 @@
 const express = require('express');
-const app = express();
 const router = express.Router();
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+const ToDo = require('../models/ToDo');
 //const { data } = require('../data-persistence/data');
-
-app.use(bodyParser.json());
 
 router.post('/add', (req, res) => {
     const { entry } = req.body;
 
-    console.log(req.body);
+    const todo = new ToDo({
+      entry: entry,
+    });
+
+    todo.save()
+        .then(data => {res.status(200).json(data)})
+        .catch(err => {res.status(500).json({ message: err })});
+
     // res.redirect('/home');
 });
 

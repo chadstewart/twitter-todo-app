@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const entrySchema = new mongoose.Schema(
+const ToDoSchema = new mongoose.Schema(
   {
       entry: {
           type: String,
@@ -14,5 +14,4 @@ const entrySchema = new mongoose.Schema(
 )
 
 
-const entry = mongoose.model('To-Dos', entrySchema);
-module.exports = entry;
+module.exports = mongoose.model('todos', ToDoSchema);
