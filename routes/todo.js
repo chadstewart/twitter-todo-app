@@ -1,18 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const ToDo = require('../models/ToDo');
-//const { data } = require('../data-persistence/data');
 
-router.post('/add', (req, res) => {
+router.post('/add', async (req, res) => {
     const { entry } = req.body;
 
     const todo = new ToDo({
       entry: entry,
     });
 
-    todo.save()
-        .then(data => {res.status(200).json(data)})
-        .catch(err => {res.status(500).json({ message: err })});
+    try {
+      const savedToDo = await todo.save();
+      res.status(200).json(savedToDo);
+    } catch (err) {
+      res.status(500).json({ message: err });
+    }
 
     // res.redirect('/home');
 });
