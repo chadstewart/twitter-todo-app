@@ -24,19 +24,36 @@ router.post('/add', async (req, res) => {
     return res.status(200).redirect('/home');
 });
 
-/* router.post('/update', (req, res) => {
-  const { record } = req.body;
-  // const { data: reqData } = req.body;
+router.post('/update', async (req, res) => {
+  const { record, entry } = req.body;
+  let todos;
+  
+  try {
 
-  if(record > 0 && record <= reqData.length) {
-      data[record - 1] = reqData;
-      res.send(`Successfully updated task #${record}
-                to ${data[record - 1]}!`);
+    todos = await mongoPull(ToDo);
+    
+  } catch (err) {
+      
+    return res.status(500).json({ message: err });
+
+  }
+
+  try {
+
+    const updatedEntry = await ToDo.updateOne(
+      { _id: todos[record]._id},
+      {$set: {
+        entry: entry
+      }});
+
+  } catch (err) {
+      
+    return res.status(500).json({ message: err });
+
   }
   
-  res.redirect('/home');
-  //res.send(`${record} does not exist!`);
-}); */
+  return res.status(200).redirect('/home');
+});
 
 router.post('/remove', async function(req, res) {
   const { remove } = req.body
@@ -55,7 +72,6 @@ router.post('/remove', async function(req, res) {
   try {
 
     const removedEntry = await ToDo.remove({ _id: todos[remove]._id });
-    res.json(removedEntry);
 
   } catch (err) {
       
@@ -63,7 +79,7 @@ router.post('/remove', async function(req, res) {
 
   }
   
-  return res.redirect('/home');
+  return res.status(200).redirect('/home');
 });
 
 module.exports = router;
