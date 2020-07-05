@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const ToDo = require('../models/ToDo');
+const mongoPull = require('../utility/mongo-pull');
+const mongoPush = require('../utility/mongo-push');
 
 router.post('/add', async (req, res) => {
     const { entry } = req.body;
@@ -10,13 +12,16 @@ router.post('/add', async (req, res) => {
     });
 
     try {
-      const savedToDo = await todo.save();
-      res.status(200).json(savedToDo);
-    } catch (err) {
-      res.status(500).json({ message: err });
-    }
 
-    // res.redirect('/home');
+      mongoPush(todo);
+
+    } catch (err) {
+
+      return res.status(500).json({ message: err });
+
+    }
+    
+    return res.status(200).redirect('/home');
 });
 
 /* router.post('/update', (req, res) => {
@@ -31,18 +36,34 @@ router.post('/add', async (req, res) => {
   
   res.redirect('/home');
   //res.send(`${record} does not exist!`);
-});
+}); */
 
-router.post('/remove', function(req, res) {
+router.post('/remove', async function(req, res) {
   const { remove } = req.body
+  let todos;
+  
+  try {
 
-  if(remove > 0 && remove <= data.length) {
-      data.splice(remove - 1, 1);
-      // return res.send(`Successfully removed ${remove}!`);
+    todos = await mongoPull(ToDo);
+    
+  } catch (err) {
+      
+    return res.status(500).json({ message: err });
+
+  }
+
+  try {
+
+    const removedEntry = await ToDo.remove({ _id: todos[remove]._id });
+    res.json(removedEntry);
+
+  } catch (err) {
+      
+    return res.status(500).json({ message: err });
+
   }
   
-  res.redirect('/home');
-  //return res.send(`${req.body.delete} does not exist!`);
-}); */
+  return res.redirect('/home');
+});
 
 module.exports = router;

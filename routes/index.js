@@ -1,17 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const ToDo = require('../models/ToDo');
+const mongoPull = require('../utility/mongo-pull');
 
 router.get('/', (req, res) => res.redirect('/home'));
 
 router.get('/home', async (req, res) => {
-  let todos;
   let data = [];
+  let todos;
   
   try {
-    todos = await ToDo.find().select('entry -_id');
+
+    todos = await mongoPull(ToDo);
+    
   } catch (err) {
+      
     return res.status(500).json({ message: err });
+
   }
 
   for(let i in todos) {
