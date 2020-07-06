@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+// bcrypt = // salting & hashing tool
+// passport =  // auth
 const ToDo = require('../models/ToDo');
 const mongoPull = require('../utility/mongo-pull');
 const mongoPush = require('../utility/mongo-push');
@@ -20,20 +22,21 @@ router.post('/add', async (req, res) => {
       return res.status(500).json({ message: err });
 
     }
-    
+
     return res.status(200).redirect('/home');
 });
 
 router.post('/update', async (req, res) => {
   const { record, entry } = req.body;
   let todos;
-  
+
   try {
 
     todos = await mongoPull(ToDo);
-    
+    // return res.status(200).json({ message: "Your action xyz was successful" })
+
   } catch (err) {
-      
+
     return res.status(500).json({ message: err });
 
   }
@@ -47,39 +50,14 @@ router.post('/update', async (req, res) => {
       }});
 
   } catch (err) {
-      
+
     return res.status(500).json({ message: err });
 
   }
-  
+
   return res.status(200).redirect('/home');
 });
 
-router.post('/remove', async function(req, res) {
-  const { remove } = req.body
-  let todos;
-  
-  try {
-
-    todos = await mongoPull(ToDo);
-    
-  } catch (err) {
-      
-    return res.status(500).json({ message: err });
-
-  }
-
-  try {
-
-    const removedEntry = await ToDo.remove({ _id: todos[remove - 1]._id });
-
-  } catch (err) {
-      
-    return res.status(500).json({ message: err });
-
-  }
-  
-  return res.status(200).redirect('/home');
-});
+router.post('/remove', xyz);
 
 module.exports = router;

@@ -2,7 +2,7 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 
 //Setup Local MongoDB Instance connection
 require('dotenv/config');
@@ -23,7 +23,7 @@ const todoRouter = require('./routes/todo');
 
 //Initialize Request Data Type
 app.use(express.json());
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 
 //Setup EJS view engine

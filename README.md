@@ -30,3 +30,11 @@
 - Don't refactor your code before it's feature complete and works
 - Don't add a UI unless the code is completely done and refactored, because UI is a stretch goal
 - Use POSTMAN exclusively: https://www.postman.com/
+
+
+##
+- xyz feateure (Sara McCombs) link to PR:
+- WIP => Work In Progress
+
+Noteworthy/Highlights:
+- Hights...xyz
