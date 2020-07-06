@@ -41,7 +41,7 @@ router.post('/update', async (req, res) => {
   try {
 
     const updatedEntry = await ToDo.updateOne(
-      { _id: todos[record]._id},
+      { _id: todos[record - 1]._id},
       {$set: {
         entry: entry
       }});
@@ -71,7 +71,7 @@ router.post('/remove', async function(req, res) {
 
   try {
 
-    const removedEntry = await ToDo.remove({ _id: todos[remove]._id });
+    const removedEntry = await ToDo.remove({ _id: todos[remove - 1]._id });
 
   } catch (err) {
       
