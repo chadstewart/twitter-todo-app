@@ -1,6 +1,15 @@
-let push = async (data) => {
+let push = (data, res) => {
 
-    return await data.save();
+    try {
+    
+        data.save();
+    
+      } catch (err) {
+    
+        res.status(500)
+        return err;
+    
+    }
 
 };
 

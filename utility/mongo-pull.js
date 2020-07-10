@@ -1,6 +1,19 @@
-let pull = async model => {
+let pull = (model, res) => {
 
-    return data = await model.find();
+    let data;
+    
+    try {
+      
+        data = model.find();
+        
+    } catch (err) {
+        
+        res.status(500);
+        return err;
+    
+    }
+    
+    return data;
     
 };
 

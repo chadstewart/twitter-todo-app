@@ -8,16 +8,9 @@ exports.todo_add = async (req, res) => {
     const todo = new ToDo({
       entry: entry,
     });
-
-    try {
-
-      mongoPush(todo);
-
-    } catch (err) {
-
-      return res.status(500).json({ message: err });
-
-    }
+    
+    await mongoPush(todo, res);
+    if (res.statusCode === 500) { return res.json({ message: todo }); }
     
     return res.status(200).redirect('/home');
 };
@@ -26,15 +19,8 @@ exports.todo_update = async (req, res) => {
     const { record, entry } = req.body;
     let todos;
     
-    try {
-  
-      todos = await mongoPull(ToDo);
-      
-    } catch (err) {
-        
-      return res.status(500).json({ message: err });
-  
-    }
+    todos = await mongoPull(ToDo, res);
+    if (res.statusCode === 500) { return res.json({ message: todos }); }
   
     try {
   
@@ -57,15 +43,8 @@ exports.todo_update = async (req, res) => {
     const { remove } = req.body
     let todos;
     
-    try {
-  
-      todos = await mongoPull(ToDo);
-      
-    } catch (err) {
-        
-      return res.status(500).json({ message: err });
-  
-    }
+    todos = await mongoPull(ToDo, res);
+    if (res.statusCode === 500) { return res.json({ message: todos }); }
   
     try {
   
