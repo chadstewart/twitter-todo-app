@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const todo_controller = require('../controller/todoController');
+const todo_controller = require('../controllers/todoController');
 
 router.post('/add', todo_controller.todo_add);
 router.post('/update', todo_controller.todo_update);

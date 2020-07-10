@@ -7,15 +7,8 @@ exports.index_home = async (req, res) => {
     let data = [];
     let todos;
     
-    try {
-  
-      todos = await mongoPull(ToDo);
-      
-    } catch (err) {
-        
-      return res.status(500).json({ message: err });
-  
-    }
+    todos = await mongoPull(ToDo, res);
+    if (res.statusCode === 500) { return res.json({ message: todos }); }
   
     for(let i in todos) {
       data.push(todos[i].entry);
